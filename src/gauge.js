@@ -90,18 +90,6 @@
       label: function(val) {return Math.round(val);}
     };
 
-    function shallowCopy(/* source, ...targets*/) {
-      var target = arguments[0], sources = slice.call(arguments, 1);
-      sources.forEach(function(s) {
-        for(k in s) {
-          if(s.hasOwnProperty(k)) {
-            target[k] = s[k];
-          }
-        }
-      });
-      return target;
-    }
-
     /**
      * A utility function to create SVG dom tree
      * @param {String} name The SVG element name
@@ -189,7 +177,7 @@
      * @return a Gauge object
      */
     return function Gauge(elem, opts) {
-      opts = shallowCopy({}, defaultOptions, opts);
+      opts = Object.assign({}, defaultOptions, opts);
       var gaugeContainer = elem,
           limit = opts.max,
           min = opts.min,
